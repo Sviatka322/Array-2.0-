@@ -102,6 +102,46 @@ public:
 		}
 	}
 
+	int operator[](int index)
+	{
+		return this->m_array[index];
+	}
+
+	bool operator==(Array& array)
+	{
+		if (this->m_size == array.m_size)
+		{
+			for (int i = 0; i < this->m_size; i++)
+			{
+				if (this->m_array[i] != array.m_array[i])
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	Array operator=(Array& array)
+	{
+		if (this == &array)
+		{
+			return *this;
+		}
+		
+		if (m_array)
+		{
+			delete[] m_array;
+		}
+
+		m_array = array.m_array;
+		m_size = array.m_size;
+		return *this;
+	}
+
 	void print()
 	{
 		for (int i = 0; i < m_size; i++)
@@ -187,6 +227,10 @@ int main()
 	ar2.push();
 	std::cout << ar2 << '\n';
 
+	bool tf = ar1 == ar2;
+
+	std::cout << tf << '\n';
+
 	ar1 + ar2;
 
 	ar2 - 3;
@@ -194,6 +238,14 @@ int main()
 
 	ar1 += 6;
 	std::cout << ar1 << '\n';
+
+	std::cout << ar1[1] << '\n';
+
+	std::cout << ar2 << '\n';
+
+	ar2 = ar1;
+
+	std::cout << ar2 << '\n';
 
 	return 0;
 }
